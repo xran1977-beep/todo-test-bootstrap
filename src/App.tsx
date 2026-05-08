@@ -30,8 +30,10 @@ export function App() {
           <TodoItem
             key={t.id}
             todo={t}
-            onToggle={() => {}}
-            onDelete={() => {}}
+            onToggle={(id) =>
+              setTodos((prev) => prev.map((x) => (x.id === id ? { ...x, done: !x.done } : x)))
+            }
+            onDelete={(id) => setTodos((prev) => prev.filter((x) => x.id !== id))}
           />
         ))}
       </ul>
