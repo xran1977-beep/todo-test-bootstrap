@@ -8,7 +8,9 @@ export function App() {
   const [todos, setTodos] = useState<Todo[]>([])
 
   const addTodo = () => {
-    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text, done: false }])
+    const trimmed = text.trim()
+    if (!trimmed) return
+    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text: trimmed, done: false }])
     setText('')
   }
 
@@ -21,7 +23,7 @@ export function App() {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button onClick={addTodo}>Add</button>
+        <button onClick={addTodo} disabled={text.trim().length === 0}>Add</button>
       </div>
       <ul>
         {todos.map((t) => (

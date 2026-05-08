@@ -13,4 +13,16 @@ describe('App', () => {
     expect(screen.getByText('Buy milk')).toBeInTheDocument()
     expect(input).toHaveValue('')
   })
+
+  it('Add button is disabled when input is empty or whitespace only', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    const button = screen.getByRole('button', { name: /add/i })
+    expect(button).toBeDisabled()
+    const input = screen.getByRole('textbox', { name: /new todo/i })
+    await user.type(input, '   ')
+    expect(button).toBeDisabled()
+    await user.type(input, 'x')
+    expect(button).toBeEnabled()
+  })
 })
