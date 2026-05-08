@@ -46,4 +46,16 @@ describe('TodoItem', () => {
     expect(onDelete).toHaveBeenCalledTimes(1)
     expect(onDelete).toHaveBeenCalledWith('id-1')
   })
+
+  it('applies the "done" class when todo.done is true', () => {
+    const { container, rerender } = render(
+      <TodoItem todo={makeTodo({ done: false })} onToggle={vi.fn()} onDelete={vi.fn()} />,
+    )
+    const li = container.querySelector('li')!
+    expect(li).not.toHaveClass('done')
+    rerender(
+      <TodoItem todo={makeTodo({ done: true })} onToggle={vi.fn()} onDelete={vi.fn()} />,
+    )
+    expect(li).toHaveClass('done')
+  })
 })

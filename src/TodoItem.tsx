@@ -8,7 +8,7 @@ type Props = {
 
 export function TodoItem({ todo, onToggle, onDelete }: Props) {
   return (
-    <li>
+    <li className={todo.done ? 'done' : undefined}>
       <label>
         <input type="checkbox" checked={todo.done} onChange={() => onToggle(todo.id)} />
         <span>{todo.text}</span>
