@@ -9,5 +9,6 @@ fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(dirname "$0")/../..}"
 
-# npm install (not ci) so the cached container state can be reused.
-npm install --no-audit --no-fund
+# npm ci: reproducible install that never rewrites package-lock.json,
+# so the hook cannot dirty the working tree.
+npm ci --no-audit --no-fund
